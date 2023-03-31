@@ -1,0 +1,2 @@
+# monitoredLoraBees
+BeehiveSensors with lorawan 
