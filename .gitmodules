@@ -1,0 +1,23 @@
+[submodule "lib/LMIC"]
+	path = lib/LMIC
+	url = https://github.com/joergkeller/arduino-lmic.git
+	branch = bugfix/issue-243-compilation-problem
+[submodule "lib/LowPower"]
+	path = lib/LowPower
+	url = https://github.com/rocketscream/Low-Power.git
+[submodule "lib/OneWire"]
+	path = lib/OneWire
+	url = https://github.com/PaulStoffregen/OneWire.git
+[submodule "lib/DallasTemperature"]
+	path = lib/DallasTemperature
+	url = https://github.com/milesburton/Arduino-Temperature-Control-Library.git
+[submodule "lib/DHT"]
+	path = lib/DHT
+	url = https://github.com/adafruit/DHT-sensor-library.git
+[submodule "lib/UnifiedSensor"]
+	path = lib/UnifiedSensor
+	url = https://github.com/adafruit/Adafruit_Sensor.git
+[submodule "lib/HX711"]
+	path = lib/HX711
+	url = https://github.com/joergkeller/HX711.git
+	branch = develop
