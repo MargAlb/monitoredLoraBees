@@ -1,8 +1,3 @@
-//
-// !!! WARNING !!! AUTO-GENERATED FILE!
-// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
-// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
-//
 {
     "configurations": [
         {
@@ -10,6 +5,10 @@
             "includePath": [
                 "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/include",
                 "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/src",
+                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoRa/src",
+                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/DISPLAY/src",
+                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/RGB/src",
+                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoraWan102/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/cores/asr650x",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/cores/asr650x/board",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/cores/asr650x/board/src",
@@ -41,14 +40,10 @@
                 "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/lib/OneWire",
                 "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/lib/UnifiedSensor",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/Basics/src",
-                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/DISPLAY/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/EEPROM",
-                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoRa/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoRaWanMinimal/src",
-                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoraWan102/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/OnBoardGPS/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/OneWire",
-                "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/RGB/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/SensorBasic/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/Sensor_ThirdParty/src",
                 "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/Servo/src",
@@ -60,6 +55,10 @@
                 "path": [
                     "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/include",
                     "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/src",
+                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoRa/src",
+                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/DISPLAY/src",
+                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/RGB/src",
+                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoraWan102/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/cores/asr650x",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/cores/asr650x/board",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/cores/asr650x/board/src",
@@ -91,14 +90,10 @@
                     "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/lib/OneWire",
                     "/Users/thomasmargreiter/plattformIO/monitoredLoraBees/lib/UnifiedSensor",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/Basics/src",
-                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/DISPLAY/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/EEPROM",
-                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoRa/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoRaWanMinimal/src",
-                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/LoraWan102/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/OnBoardGPS/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/OneWire",
-                    "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/RGB/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/SensorBasic/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/Sensor_ThirdParty/src",
                     "/Users/thomasmargreiter/.platformio/packages/framework-arduinoasrmicro/libraries/Servo/src",
@@ -120,9 +115,9 @@
                 "CONFIG_LORA_USE_TCXO",
                 "F_CPU=48000000L",
                 "SOFT_SE",
-                "REGION_US915",
-                "ACTIVE_REGION=LORAMAC_REGION_US915",
-                "LORAWAN_CLASS=CLASS_A",
+                "REGION_EU868",
+                "ACTIVE_REGION=LORAMAC_REGION_EU868",
+                "LORAWAN_CLASS=CLASS_C",
                 "LORAWAN_NETMODE=true",
                 "LORAWAN_ADR=true",
                 "LORAWAN_UPLINKMODE=true",

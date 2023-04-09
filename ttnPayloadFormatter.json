@@ -1,0 +1,79 @@
+function Decoder(bytes, port) {
+  // Decode an ThingSpeak formatted uplink message from a buffer
+  // (array) of bytes to an object of fields.
+
+  // Payload: 00 88 01 25 00 8E 12 AC 08 0E 08 14 08 9E 07 C9 07 91 07 (19 bytes)
+  // {
+  //   "field1": 20.62, // Aussentemperatur
+  //   "field2": 20.68, // Kälteloch
+  //   "field3": 19.5,  // Temperatur 200mm
+  //   "field4": 19.93, // Temperatur 300mm
+  //   "field5": 19.37, // Temperatur 400mm
+  //   "field6": 22.2,  // Dachtemperatur (DHT22)
+  //   "field7": 47.5,  // Dachfeuchtigkeit (DHT22)
+  //   "field8": 0.37,  // Gewicht
+  //   "status": "version 0, 3.92 V",
+  //   "sensor": {
+  //     "version": 0,
+  //     "battery": 3.92,
+  //     "weight": 0.37,
+  //     "humidity": {
+  //       "roof": 47.5
+  //     },
+  //     "temperature": {
+  //       "drop": 20.68,
+  //       "lower": 19.5,
+  //       "middle": 19.93,
+  //       "outer": 20.62,
+  //       "roof": 22.2,
+  //       "upper": 19.37
+  //     }
+  //   }
+  // }
+
+  function asShort(index) {
+    if (bytes.length < index) return null;
+    var x = (bytes[index+1] << 8) | bytes[index];
+    if ((x & 0x8000) > 0) {
+      return -(x ^ 0xffff) - 1;
+    }
+    return x;
+  }
+
+  function asFloat(index) {
+    var value = asShort(index);
+    if (!value || value == -32768) {
+      return null;
+    } else {
+      return value / 100.0;
+    }
+  }
+
+  var sensorData = {
+    /*    add2LoraPacket(0,insideTemp);
+    add2LoraPacket( 2,outsideTemp);
+    add2LoraPacket( 4,humidity);
+    add2LoraPacket( 6,airPressureHPA);
+    add2LoraPacket( 8,voltage);
+    add2LoraPacket( 10,weight);
+    */
+    insideTemp: asFloat[0],
+    outsideTemp: asFloat(2),
+    humidity: asFloat(4),
+    airPressureHPA : asFloat(6),
+    voltage : asFloat(8),
+    weight : asFloat(10),
+    version: "0.1a by TMargreiter"
+  };
+
+  return { // ThingSpeak format
+    field1: sensorData.insideTemp,
+    field2: sensorData.outsideTemp,
+    field3: sensorData.humidity,
+    field4: sensorData.airPressureHPA,
+    field5: sensorData.voltage,
+    field6: sensorData.weight,
+    status: 'version ' + sensorData.version + ', ' + sensorData.voltage + " V",
+    sensor: sensorData // ignored by ThingSpeak
+  }
+}
