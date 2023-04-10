@@ -13,6 +13,7 @@ keep in mind, that the max. airtime/node in lora is limited to 30 sec. per day
 - optional:  DS18B20 temperature sensor (1-Wire for external use) 
 - 3,7V 1100mAh Lipo Accu 1S 3C
 - optional: solar panel 1W 5V 100mA
+- this version is tested mith mikrotik lorawan Gateway (wap lora8 kit) ... there is also a version without TTN-support on https://github.com/thomasX/monitoredBees
 
 ### pinout
 
