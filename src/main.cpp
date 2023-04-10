@@ -175,15 +175,10 @@ void  DoubleToString( char *str, double double_num,unsigned int len) {
 }
 
 
-void initSensorsAndSerial(){
+void initSensors(){
 	  pinMode(Vext, OUTPUT);
     digitalWrite(Vext, LOW);
     delay(500);
-    if (WITH_SERIAL_LOGGING) {
-      Serial.begin(115200);    
-      delay(2000);
-      while(!Serial);    // time to get serial running
-    }
     logSerial("monitoredBees is initializing ");
     sensors.begin();
     BME280detected=bme280.begin();
@@ -260,17 +255,20 @@ void add2LoraPacket(int index, float value){
   appData[index+1] = highByte(currentValue);
   appData[index] = lowByte(currentValue);
 	//appData[index] = asShort(value);
-  sprintf(logMsg, "currentValue: %d und nur als Byte : %02X %02X",currentValue,appData[index+1],appData[index]);
-  logSerial(logMsg);
+  // sprintf(logMsg, "currentValue: %d und nur als Byte : %02X %02X",currentValue,appData[index+1],appData[index]);
+  // logSerial(logMsg);
 }
 void printAppData(){
-	int i;
-	for (i = 0; i < 12; i++)
-	{
-			if (i > 0) printf(":");
-			printf("%02X", appData[i]);
-	}
-	printf("\n");
+  if (WITH_SERIAL_LOGGING) {
+    int i;
+    sprintf(logMsg,"Appdata: ");
+    for (i = 0; i < 12; i++)
+    {
+        // if (i > 0) printf(":");
+        sprintf(logMsg,"%s %02X",logMsg, appData[i]);
+    }
+    logSerial(logMsg);
+  }
 }
 boolean generateLoraPacket( void )
 {
@@ -312,8 +310,10 @@ long readSensorValues( void )
     if (scale.is_ready()) {
        logSerial("HX711 detected");
        long reading = scale.read() - LOADCELL_TARA;
-           Serial.printf("hx711   %s\r\n","AHA!");  
-           Serial.printf("hx711   %ld\r\n",reading);  
+           sprintf(logMsg,"hx711   %s\r\n","AHA!");  
+           logSerial(logMsg);
+           sprintf(logMsg,"hx711   %ld\r\n",reading);  
+           logSerial(logMsg);
 
        weight = (1.0 * reading / LOADCELL_CALIB_FACTOR);
     } 
@@ -344,8 +344,13 @@ void generateDataPacket( void )
 }
 
 void setup() {
+  if (WITH_SERIAL_LOGGING) {
+      Serial.begin(115200);    
+      delay(2000);
+      while(!Serial);    // time to get serial running
+  }
   prepareTxFrame( appPort );
-	initSensorsAndSerial();
+	initSensors();
 
 #if(AT_SUPPORT)
 	enableAt();
@@ -382,7 +387,13 @@ void loop() {
         logSerial("##Send## :");
 				delay(200);
 					// prepareTxFrame( appPort );
+          long meassurementDelay = readSensorValues();
+					sprintf(logMsg,"Die Messung dauerte %d ms" , meassurementDelay);
+          logSerial(logMsg);
+          generateDataPacket();
           boolean valid = generateLoraPacket();
+          sprintf(logMsg,"sending packet \"%s\" , length %d\r\n",txpacket, strlen(txpacket));
+          logSerial(logMsg);
 					LoRaWAN.send();
 					deviceState = DEVICE_STATE_CYCLE;
 					break;
@@ -392,12 +403,6 @@ void loop() {
 					// Schedule next packet transmission
           logSerial("##Cycle## :");
 					txDutyCycleTime = appTxDutyCycle + randr( 0, APP_TX_DUTYCYCLE_RND );
-					long meassurementDelay = readSensorValues();
-					sprintf(logMsg,"Die Messung dauerte %d ms" , meassurementDelay);
-          logSerial(logMsg);
-          generateDataPacket();
-          sprintf(logMsg,"sending packet \"%s\" , length %d\r\n",txpacket, strlen(txpacket));
-          logSerial(logMsg);
 					LoRaWAN.cycle(txDutyCycleTime);
 					deviceState = DEVICE_STATE_SLEEP;
 					break;
