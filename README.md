@@ -51,3 +51,34 @@ with the following field-definition it is possible to use the Android and IOS-AP
 | field5 | air quality |
 | field6 | weight |
 | field7 | unused |
+
+   
+## Checkout this project
+Local installation of `git` and `Visual Studio Code` assumed.\
+~~~
+cd <project-root>
+git clone https://https://github.com/thomasX/monitoredLoraBees.git
+cd monitoredLoraBees
+git submodule init
+git submodule update
+~~~
+To fetch the latest updates:
+~~~
+cd <project-root>
+cd monitoredLoraBees
+git stash
+git pull
+git submodule update
+git stash pop
+~~~
+copy the file config.h.template to config.h
+change your settings in config.h
+~~~
+
+
+The project already includes all required libraries (that is the reason for the submodule commands and for the local sketchbook location).
+
+The project is configured for the heltec cubecell-board HTCC-AB01 
+if you want to change the platform please consider the documentations of platformio https://docs.platformio.org/en/latest/
+
+
