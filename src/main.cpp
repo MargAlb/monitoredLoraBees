@@ -48,8 +48,9 @@ DeviceClass_t  loraWanClass = LORAWAN_CLASS;
 
 /*the application data transmission duty cycle.  value in [ms].*/
 #ifndef MODE_TESTING_ONLY
-  uint32_t appTxDutyCycle = 1000*60*15;
-	#define timetillwakeup 1000*60*15
+  // max 30sec airtime per day -> sf7 = 0.6s airtime, sf12 = 1,49s airtime
+  // we send 12 msg / day -> 12*1,49=18s  
+  uint32_t appTxDutyCycle = 1000*60*120;
 #endif
 #ifdef MODE_TESTING_ONLY
   uint32_t appTxDutyCycle = 60000;
