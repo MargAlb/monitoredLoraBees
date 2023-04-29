@@ -66,6 +66,7 @@ DeviceClass_t  loraWanClass = LORAWAN_CLASS;
 /*OTAA or ABP*/
 bool overTheAirActivation = LORAWAN_NETMODE;
 
+
 /*ADR enable*/
 bool loraWanAdr = LORAWAN_ADR;
 
@@ -100,6 +101,8 @@ uint8_t appPort = 2;
 uint8_t confirmedNbTrials = 4;
 
 boolean generateLoraPacket( void );
+void setupHX711() ;
+
 
 /* Prepares the payload of the frame */
 static void prepareTxFrame( uint8_t port )
@@ -243,15 +246,9 @@ inline
 boolean isDefined(float value) { return ! isUndefined(value); }
 
 
-inline
-short asShort(float value) {
-  if (isUndefined(value)) return UNDEFINED_VALUE;
-  return value * 100;
-}
-
-void add2LoraPacket(int index, float value){
-  
-  short currentValue = value * 100;
+void add2LoraPacket(int index, float value, int precision){
+  int factor = pow(10,precision);
+  short currentValue = value * factor;
   appData[index+1] = highByte(currentValue);
   appData[index] = lowByte(currentValue);
 	//appData[index] = asShort(value);
@@ -272,12 +269,12 @@ void printAppData(){
 }
 boolean generateLoraPacket( void )
 {
-    add2LoraPacket(0,insideTemp);
-    add2LoraPacket( 2,outsideTemp);
-    add2LoraPacket( 4,humidity);
-    add2LoraPacket( 6,airPressureHPA);
-    add2LoraPacket( 8,voltage);
-    add2LoraPacket( 10,weight);
+    add2LoraPacket(0,insideTemp,2);
+    add2LoraPacket( 2,outsideTemp,2);
+    add2LoraPacket( 4,humidity,2);
+    add2LoraPacket( 6,airPressureHPA,1);
+    add2LoraPacket( 8,voltage,2);
+    add2LoraPacket( 10,weight,2);
 		printAppData();
     return true;
 }

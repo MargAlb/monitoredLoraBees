@@ -122,7 +122,7 @@
                 "SOFT_SE",
                 "REGION_EU868",
                 "ACTIVE_REGION=LORAMAC_REGION_EU868",
-                "LORAWAN_CLASS=CLASS_C",
+                "LORAWAN_CLASS=CLASS_A",
                 "LORAWAN_NETMODE=true",
                 "LORAWAN_ADR=true",
                 "LORAWAN_UPLINKMODE=true",

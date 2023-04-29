@@ -40,12 +40,13 @@ function Decoder(bytes, port) {
     return x;
   }
 
-  function asFloat(index) {
+  function asFloat(index,precision) {
     var value = asShort(index);
+    var factor = Math.pow(10,precision);
     if (!value || value == -32768) {
       return null;
     } else {
-      return value / 100.0;
+      return value / factor;
     }
   }
 
@@ -57,12 +58,12 @@ function Decoder(bytes, port) {
     add2LoraPacket( 8,voltage);
     add2LoraPacket( 10,weight);
     */
-    insideTemp: asFloat[0],
-    outsideTemp: asFloat(2),
-    humidity: asFloat(4),
-    airPressureHPA : asFloat(6),
-    voltage : asFloat(8),
-    weight : asFloat(10),
+    insideTemp: asFloat(0,2),
+    outsideTemp: asFloat(2,2),
+    humidity: asFloat(4,2),
+    airPressureHPA : asFloat(6,1),
+    voltage : asFloat(8,2),
+    weight : asFloat(10,2),
     version: "0.1a by TMargreiter"
   };
 
