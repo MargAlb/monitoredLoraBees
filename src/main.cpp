@@ -48,10 +48,16 @@ DeviceClass_t  loraWanClass = LORAWAN_CLASS;
 
 /*the application data transmission duty cycle.  value in [ms].*/
 #ifndef MODE_TESTING_ONLY
-  // max 30sec airtime per day -> sf7 = 0.6s airtime, sf12 = 1,49s airtime
-  // we send 12 msg / day -> 12*1,49=18s  
+/* max 30sec airtime per day so we can choose: 
+  -> sf7 = 0.06 s airtime ≈ 428msg/day
+  -> sf8 = 0,12 sec airtime  ≈ 250 msg/day
+  -> sf12 = 1,49s airtime   ≈ 20 msg/day
   uint32_t appTxDutyCycle = 1000*60*120;
+*/
+// every 15 minutes
+uint32_t appTxDutyCycle = 1000*60*15;
 #endif
+
 #ifdef MODE_TESTING_ONLY
   uint32_t appTxDutyCycle = 60000;
 #endif
@@ -61,7 +67,7 @@ DeviceClass_t  loraWanClass = LORAWAN_CLASS;
  * RGB green means received done;
  */
 #ifndef LoraWan_RGB
-#define LoraWan_RGB 0
+ #define LoraWan_RGB 0
 #endif
 
 /*OTAA or ABP*/
@@ -393,7 +399,8 @@ void loop() {
           sprintf(logMsg,"sending packet \"%s\" , length %d\r\n",txpacket, strlen(txpacket));
           logSerial(logMsg);
 					LoRaWAN.send();
-					deviceState = DEVICE_STATE_CYCLE;
+          delay(1000);
+          deviceState = DEVICE_STATE_CYCLE;
 					break;
 				}
 				case DEVICE_STATE_CYCLE:
