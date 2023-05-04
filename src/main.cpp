@@ -399,7 +399,9 @@ void loop() {
           sprintf(logMsg,"sending packet \"%s\" , length %d\r\n",txpacket, strlen(txpacket));
           logSerial(logMsg);
 					LoRaWAN.send();
-          delay(1000);
+          delay(500);
+          digitalWrite(Vext,HIGH);
+          delay(500);
           deviceState = DEVICE_STATE_CYCLE;
 					break;
 				}
