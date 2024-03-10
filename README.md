@@ -57,7 +57,7 @@ with the following field-definition it is possible to use the Android and IOS-AP
 Local installation of `git` and `Visual Studio Code` assumed.\
 ~~~
 cd <project-root>
-git clone https://https://github.com/thomasX/monitoredLoraBees.git
+git clone https://github.com/thomasX/monitoredLoraBees.git
 cd monitoredLoraBees
 git submodule init
 git submodule update
